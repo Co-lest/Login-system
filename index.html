@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body {
+          display: flex;
+          flex-direction: column;
+          background-image: url(Screenshot_20221220-234031.jpg);
+          background-size: cover;
+        }
+        form {
+          display: flex;
+          flex-direction: column;
+          width: 20%;
+          margin: auto;
+          width: 30%;
+          border-radius: 10px;
+          padding: 20px;
+          background-color: rgba(255, 255, 255, 0.4);
+          margin-top: 50px;
+        }
+        form > input {
+          margin: 5px;
+          height: 30px;
+          font-size: 15px;
+          border-radius: 5px;
+          border: 1px;
+          padding-left: 10px;
+        }
+        form > button {
+          width: 60px;
+          height: 30px;
+          border-radius: 5px;
+          background-color: black;
+          color: white;
+          border: 1px;
+          transition: all 0.5s ease-in-out;
+          display: none;
+        }
+        #submitForm {
+          width: 60px;
+          height: 30px;
+          border-radius: 5px;
+          background-color: black;
+          color: white;
+          border: 1px;
+          transition: all 0.5s ease-in-out;
+        }
+        #submitForm:hover {
+          background-color: rgb(130, 130, 130);
+          padding: 5px 10px;
+          width: 70px;
+          height: 40px;
+          border: none;
+          transition: all 0.5s ease-in-out;
+        }
+        body > h1 {
+          margin: auto;
+        }
+        body > h2 {
+          margin: auto;
+        }
+        .actualForm > input {
+          margin: 5px;
+          height: 30px;
+          font-size: 15px;
+          border-radius: 5px;
+          border: 1px;
+          padding-left: 10px;
+        }
+        .actualForm > button {
+          width: 50px;
+          margin: auto;
+        }
+        .shake {
+          animation: shake 0.3s linear;
+        }
+        @keyframes shake {
+          0% {
+            transform: translate(0);
+          }
+          10% {
+            transform: translate(-2px);
+          }
+          20% {
+            transform: translate(0);
+          }
+          30% {
+            transform: translate(2px);
+          }
+          40% {
+            transform: translate(0);
+          }
+          50% {
+            transform: translate(-2px);
+          }
+          60% {
+            transform: translate(0);
+          }
+          70% {
+            transform: translate(2px);
+          }
+          80% {
+            transform: translate(0);
+          }
+          90% {
+            transform: translate(-2px);
+          }
+          100% {
+            transform: translate(0);
+          }
+        }
+      </style>
+  </head>
+  <body>
+    <h1>Sign in!</h1>
+    <form action="" method="post" id="actualForm">
+      <label for="nameDevice">Name:</label><br />
+      <input
+        type="text"
+        name="nameDevice"
+        id="nameDevice"
+        required
+        class="inputText"
+        placeholder="Device/email/app"
+        required
+      /><br />
+      <label for="pass">Create password:</label><br />
+      <input
+        type="password"
+        name="pass"
+        required
+        id="pass"
+        class="inputText"
+        placeholder="Password"
+        required
+      /><br />
+      <input type="checkbox" id="passwordCheck" name="passwordCheck" />
+      <label for="passwordCheck">See password</label><br />
+      <label for="passConfirm">Confirm password:</label><br />
+      <input
+        type="password"
+        name="passConfirm"
+        id="passConfirm"
+        class="inputText"
+        placeholder="Confirm password"
+        required
+      /><br />
+      <input
+        type="checkbox"
+        id="passwordConfirmCheck"
+        name="passwordConfirmCheck"
+      />
+      <label for="passwordConfirmCheck">See password</label><br />
+      <label for="comment">Comment</label><br />
+      <textarea name="comment" id="comment"></textarea><br />
+      <input type="submit" name="sub" id="submitForm" />
+      <a href="includes/sign.html">Already have an account? Sign in</a>
+    </form>
+  </body>
+  <script defer>
+    const submitForm = document.querySelector("#submitForm");
+    //const skdcdknc = 1;
+
+    window.addEventListener("load", () => {
+      passwordConfirmCheck.checked = false;
+      passwordCheck.checked = false;
+    })
+
+    submitForm.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const errors = document.querySelectorAll(".err");
+      errors.forEach(error => error.remove());
+
+      if (nameDevice.value.trim() === "" || pass.value.trim() === "" || passConfirm.value.trim() === "") {
+        errorDisplay("Must fill out all the recommended fields!");
+        return;
+      }
+
+      if (pass.value !== passConfirm.value) {
+        errorDisplay("Passwords do not match. Please enter again!");
+        return;
+      }
+
+      actualForm.submit();
+    });
+  </script>
+</html>
