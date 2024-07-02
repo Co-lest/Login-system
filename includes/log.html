@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .err{
+        color: red;
+    }
+    body{
+        background-image: url("../Screenshot_20221220-234031.jpg");
+        background-size: cover;
+    }
+    #actualForm{
+        display: flex;
+          flex-flow: column;
+          width: 20%;
+          margin: auto;
+          width: 30%;
+          border-radius: 10px;
+          padding: 20px;
+          background-color: rgba(255, 255, 255, 0.4);
+          margin-top: 50px;
+    }
+    form > input{
+        margin: 5px;
+        height: 30px;
+        font-size: 15px;
+        border-radius: 5px;
+        border: 1px;
+        padding-left: 10px;
+    
+    }
+    .shake {
+          animation: shake 0.3s linear;
+        }
+        @keyframes shake {
+          0% {
+            transform: translate(0);
+          }
+          10% {
+            transform: translate(-2px);
+          }
+          20% {
+            transform: translate(0);
+          }
+          30% {
+            transform: translate(2px);
+          }
+          40% {
+            transform: translate(0);
+          }
+          50% {
+            transform: translate(-2px);
+          }
+          60% {
+            transform: translate(0);
+          }
+          70% {
+            transform: translate(2px);
+          }
+          80% {
+            transform: translate(0);
+          }
+          90% {
+            transform: translate(-2px);
+          }
+          100% {
+            transform: translate(0);
+          }
+        }
+</style>
+<body>
+    <form action="/includes/log.inc.php" method="post" id="actualForm">
+        <label for="namePerson">Name:</label><br>
+        <input type="text" name="namePerson" id="namePerson" required><br>
+        <label for="pass">Password:</label><br>
+        <input type="password" name="pass" id="pass" required><br>
+        <input type="checkbox" id="passwordCheck" name="passwordCheck">
+        <label for="passwordCheck">See password</label><br>
+        <input type="submit" id="submitForm">
+    </form>
+</body>
+<script defer>
+    const actualForm = document.querySelector("#actualForm")
+    const passwordCheck = document.querySelector("#passwordCheck");
+    const namePerson = document.querySelector("#namePerson");
+    const pass = document.querySelector("#pass");
+    const submitForm = document.querySelector("#submitForm");
+
+    window.addEventListener("load", () => {
+        passwordCheck.checked = false;
+    })
+
+    submitForm.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      if (namePerson.value.trim() === "" || pass.value.trim() === "") {
+        namePerson.classList.add("shake");
+        pass.classList.add("shake");
+
+        setTimeout(() => {
+        namePerson.classList.remove("shake");
+        pass.classList.remove("shake");
+        }, 4000);
+
+        errorDisplay("Must fill out all the recommended fields!");
+        return;
+      }
+
+      actualForm.submit();
+    });
+
+    function errorDisplay(errorMessage) {
+      const err = document.createElement("p");
+      err.textContent = errorMessage;
+      err.setAttribute("class", "err");
+      actualForm.appendChild(err);
+      setTimeout(() => {
+        err.remove();
+      }, 4000);
+    }
+
+    passwordCheck.addEventListener("change", () => {
+      pass.setAttribute("type", passwordCheck.checked ? "text" : "password");
+    });
+</script>
+</html>
